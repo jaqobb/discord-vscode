@@ -1,5 +1,5 @@
 import { basename, parse, sep } from 'path';
-import { debug, Disposable, env, window, workspace } from 'vscode';
+import { debug, Disposable, env, window, workspace, version } from 'vscode';
 import * as vsls from 'vsls';
 import RPCClient from '../client/RPCClient';
 const lang = require('../data/languages.json'); // eslint-disable-line
@@ -129,7 +129,7 @@ export default class Activity implements Disposable {
 				: env.appName.includes('Insiders')
 				? 'vscode-insiders'
 				: 'vscode',
-			smallImageText: this.client.config.get<string>('smallImage')!.replace('{appname}', env.appName),
+			smallImageText: this.client.config.get<string>('smallImage')!.replace('{appname}', env.appName).replace('{appversion}', version),
 		};
 
 		return this._state;
