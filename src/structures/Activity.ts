@@ -49,7 +49,7 @@ export default class Activity implements Disposable {
 	}
 
 	public async generate(workspaceElapsedTime = false) {
-		let largeImageKey: any = 'vscode-big';
+		let largeImageKey: any = 'vscode';
 		if (window.activeTextEditor) {
 			if (window.activeTextEditor.document.languageId === 'Log') return this._state;
 			if (this._state && window.activeTextEditor.document.fileName === this._lastKnownFile) {
@@ -123,12 +123,14 @@ export default class Activity implements Disposable {
 						)
 						.replace('{LANG}', largeImageKey ? (largeImageKey.image || largeImageKey).toUpperCase() : 'TXT') ||
 				  window.activeTextEditor.document.languageId.padEnd(2, '\u200b')
-				: this.client.config.get<string>('largeImageIdle'),
-			smallImageKey: debug.activeDebugSession
+				: this.client.config.get<string>('largeImageIdle')!.replace('{appname}', env.appName).replace('{appversion}', version),
+			smallImageKey: window.activeTextEditor
+				? debug.activeDebugSession
 				? 'debug'
 				: env.appName.includes('Insiders')
 				? 'vscode-insiders'
-				: 'vscode',
+				: 'vscode'
+				: empty,
 			smallImageText: this.client.config.get<string>('smallImage')!.replace('{appname}', env.appName).replace('{appversion}', version),
 		};
 

@@ -131,7 +131,7 @@
 					"discord.largeImageIdle": {
 						"type": "string",
 						"default": "Idling",
-						"description": "Custom string for the largeImageText section of the rich presence when idling"
+						"description": "Custom string for the largeImageText section of the rich presence when idling\n\t- '{appname}' will get replaced with the current Visual Studio Code application name.\n\t- '{appversion}' will get replaced with the current Visual Studio code application version."
 					},
 					"discord.smallImage": {
 						"type": "string",
